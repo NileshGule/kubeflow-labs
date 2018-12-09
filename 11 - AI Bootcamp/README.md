@@ -11,3 +11,27 @@ az aks get-versions `
 --location "South East Asia"
 
 ```
+
+### Create job using yaml file
+
+```powershell
+
+ kubectl apply -f .\mnist-job.yml
+
+ ```
+
+ ### Get job
+
+```powershell
+
+ kubectl get job
+
+ ```
+
+ ### Get pod details
+
+```powershell
+
+ kubectl get pods
+
+ ```

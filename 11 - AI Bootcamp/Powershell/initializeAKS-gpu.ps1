@@ -6,13 +6,14 @@ Param(
     [parameter(Mandatory=$false)]
     [string]$resourceGroupLocaltion="South East Asia",
     [parameter(Mandatory=$false)]
-    [string]$clusterName="aksCluster",
+    [string]$clusterName="gpuCluster",
     [parameter(Mandatory=$false)]
-    [string]$nodeVMSize="Standard_D2_v2",
+    [string]$nodeVMSize="Standard_NC6s_v2",
     [parameter(Mandatory=$false)]
     [int16]$workerNodeCount=3
     # [parameter(Mandatory=$false)]
-    # [string]$kubernetesVersion="1.11.1"    
+    # [string]$kubernetesVersion="1.11.1"
+    
 )
 
 # Set Azure subscription name
