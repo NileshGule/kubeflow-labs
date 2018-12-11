@@ -1,6 +1,6 @@
 Param(
     [parameter(Mandatory=$false)]
-    [string]$resourceGroupName="aibootcampsg2018",
+    [string]$resourceGroupName="aibootcamp",
     [parameter(Mandatory=$false)]
     [string]$clusterName="aksCluster"
 )

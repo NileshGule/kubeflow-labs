@@ -9,11 +9,12 @@ spec:
     spec:
       containers: # List of containers that should run inside the pod, in our case there is only one.
       - name: tensorflow
-        image: nileshgule/tf-mnist:gpu # The image to run, you can replace by your own.
+        # image: nileshgule/tf-mnist:gpu # The image to run, you can replace by your own.
+        image: nileshgule/tf-mnist # The image to run, you can replace by your own.
         args: ["--max_steps", "500"] # Optional arguments to pass to our command. By default the command is defined by ENTRYPOINT in the Dockerfile
-        resources:
-          limits:
-            nvidia.com/gpu: 1 # We ask Kubernetes to assign 1 GPU to this container
+        # resources:
+        #   limits:
+        #     nvidia.com/gpu: 1 # We ask Kubernetes to assign 1 GPU to this container
         volumeMounts:
         - name: nvidia
           mountPath: /usr/local/nvidia

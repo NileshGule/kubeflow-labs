@@ -16,22 +16,28 @@ az aks get-versions `
 
 ```powershell
 
- kubectl apply -f .\mnist-job.yml
+ kubectl apply -f .\mnist-job-without-gpu.yml
+
+ kubectl apply -f .\mnist-job-with-gpu.yml
 
  ```
 
- ### Get job
+### Get job
 
 ```powershell
 
- kubectl get job
+kubectl get job
 
  ```
 
- ### Get pod details
+### Get pod details
 
 ```powershell
 
  kubectl get pods
 
  ```
+
+ kubectl create namespace gpu-resources
+
+kubectl apply -f .\nvidia-device-plugin-ds.yaml

@@ -4,15 +4,15 @@ Param(
     [parameter(Mandatory=$false)]
     [string]$resourceGroupName="aibootcamp",
     [parameter(Mandatory=$false)]
-    [string]$resourceGroupLocaltion="South East Asia",
+    [string]$resourceGroupLocaltion="West US 2",
     [parameter(Mandatory=$false)]
     [string]$clusterName="gpuCluster",
     [parameter(Mandatory=$false)]
-    [string]$nodeVMSize="Standard_NC6s_v2",
+    [string]$nodeVMSize="Standard_NC6",
     [parameter(Mandatory=$false)]
-    [int16]$workerNodeCount=3
-    # [parameter(Mandatory=$false)]
-    # [string]$kubernetesVersion="1.11.1"
+    [int16]$workerNodeCount=3,
+    [parameter(Mandatory=$false)]
+    [string]$kubernetesVersion="1.10.9"
     
 )
 
@@ -34,10 +34,11 @@ az aks create `
 --name=$clusterName `
 --node-vm-size=$nodeVMSize `
 --node-count=$workerNodeCount `
+--kubernetes-version=$kubernetesVersion `
 --generate-ssh-keys `
 --disable-rbac `
 --output=jsonc
-# --kubernetes-version=$kubernetesVersion `
+
 
 
 
