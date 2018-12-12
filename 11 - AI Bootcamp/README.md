@@ -41,3 +41,28 @@ kubectl get job
  kubectl create namespace gpu-resources
 
 kubectl apply -f .\nvidia-device-plugin-ds.yaml
+
+#kubeflow
+
+ $NAMESPACE = "kubeflow"
+ kubectl create namespace $NAMESPACE
+
+ $VERSION = "v0.2.2"
+
+$APP_NAME = "my-kubeflow"
+ks init $APP_NAME
+cd $APP_NAME
+ks env set default --namespace $NAMESPACE
+
+ks registry add kubeflow github.com/kubeflow/kubeflow/tree/$VERSION/kubeflow
+
+ks pkg install kubeflow/core@$VERSION
+ks pkg install kubeflow/tf-serving@$VERSION
+
+ks generate kubeflow-core kubeflow-core
+
+ks param set kubeflow-core cloud aks
+
+ks apply default -c kubeflow-core
+
+
