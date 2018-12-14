@@ -1,0 +1,50 @@
+apiVersion: kubeflow.org/v1alpha2
+kind: TFJob
+metadata:
+  name: module7-ex1-gpu
+spec:
+  tfReplicaSpecs:
+    MASTER:
+      replicas: 1
+      template:
+        spec:
+          volumes:
+            - name: azurefile
+              persistentVolumeClaim:
+                claimName: azurefile
+          containers:
+          - image: nileshgule/tf-mnist:distributedgpu  # You can replace this by your own image
+            name: tensorflow
+            imagePullPolicy: Always
+            resources:
+              limits:
+                nvidia.com/gpu: 1
+            volumeMounts:
+              - mountPath: /tmp/tensorflow
+                subPath: module7-ex1-gpu
+                name: azurefile
+          restartPolicy: OnFailure
+    WORKER:
+      replicas: 2
+      template:
+        spec:
+          containers:
+          - image: nileshgule/tf-mnist:distributedgpu  # You can replace this by your own image    
+            name: tensorflow
+            imagePullPolicy: Always
+            resources:
+              limits:
+                nvidia.com/gpu: 1
+            volumeMounts:
+          restartPolicy: OnFailure
+    PS:
+      replicas: 1
+      template:
+        spec:
+          containers:
+          - image: nileshgule/tf-mnist:distributed  # You can replace this by your own image 
+            name: tensorflow
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 6006
+          restartPolicy: OnFailure

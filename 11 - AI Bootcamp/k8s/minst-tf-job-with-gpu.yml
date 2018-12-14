@@ -1,0 +1,17 @@
+apiVersion: kubeflow.org/v1alpha2
+kind: TFJob
+metadata:
+  name: module6-ex1-gpu
+spec:
+  tfReplicaSpecs:
+    MASTER:
+      replicas: 1
+      template:
+        spec:
+          containers:
+            - image: nileshgule/tf-mnist:gpu  # From module 1
+              name: tensorflow
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
+          restartPolicy: OnFailure

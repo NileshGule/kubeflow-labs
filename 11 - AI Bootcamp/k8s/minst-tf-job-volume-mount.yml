@@ -1,0 +1,25 @@
+apiVersion: kubeflow.org/v1alpha2
+kind: TFJob
+metadata:
+  name: module6-ex2-gpu
+spec:
+  tfReplicaSpecs:
+    MASTER:
+      replicas: 1
+      template:
+        spec:
+          containers:
+            - image: nileshgule/tf-mnist:gpu  # From module 1
+              name: tensorflow
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
+              volumeMounts:
+              - name: azurefile
+                subPath: module6-ex2-gpu
+                mountPath: /tmp/tensorflow
+          restartPolicy: OnFailure
+          volumes:
+          - name: azurefile
+            persistentVolumeClaim:
+              claimName: azurefile
